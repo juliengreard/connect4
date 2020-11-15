@@ -67,7 +67,7 @@ def has_player_won(board):
                 column_win = False
                 # TODO, prendre en compte la variable NbAlignToWin
                 if line_possible(line, col, board):
-                    line_win = (pawn == board.get(col + 1,line) and  pawn == board.get(col + 1 ,line) and  pawn == board.get(col + 3,line))
+                    line_win = (pawn == board.get(col + 1,line) and  pawn == board.get(col + 2 ,line) and  pawn == board.get(col + 3,line))
                 if diagup_possible(line, col, board):
                     diag_win = (pawn == board.get(col + 1, line + 1) and  pawn == board.get(col + 2, line + 2 ) and  pawn == board.get(col + 3,line + 3))
                 if diagdown_possible(line, col, board):
