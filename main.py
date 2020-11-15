@@ -10,6 +10,7 @@ from kernel.config import (
 )
 from framework.exceptions import IllegalMove
 from players.manual import ManualPlayer
+from players.random_player import RandomPlayer
 
 def start():
     board = Board(Columns, Lines)
@@ -18,13 +19,24 @@ def start():
 
 def game_setup():
     players = []
+
+    # setup with 1 human vs 1 bot
+    #name = raw_input("What's your name ? \n")
+    #player = ManualPlayer(name)
+    #players.append(player)
+    #print "player added : {}".format(name)
+    #players.append(RandomPlayer("B"))
+    #players.append(RandomPlayer("C"))
+    #return players
+    # setup with 2 humans
+    #'''
     for player in range(NbOfPlayer):
         name = raw_input("What's your name ? \n")
         player = ManualPlayer(name)
         players.append(player)
         print "player added : {}".format(name)
     return players
-
+    #'''
 
 def has_player_won(board):
     winner = None
@@ -118,7 +130,7 @@ while (not game_over):
                 break
 
 if winner:
-    print "Game over, player {} won".format(winner.name)
+    print "Game over, player {} won".format(winner)
 else:
     print "Game over, draw"
 
