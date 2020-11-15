@@ -28,20 +28,23 @@ def start():
 
 def create_player(player_type):
 
+    player = None
     if player_type == Players.Manual:
         name = raw_input("What's your name ? \n")
         print "player added : {}".format(name)
         player = ManualPlayer(name)
-        return player
     elif player_type == Players.Bot:
-        return RandomPlayer("A")
+        player = RandomPlayer("RandomBot")
     else:
         raise MotorException("No other player type is available!")
+
+    return player
 
 def game_setup():
 
     p1 = create_player(Player1)
     p2 = create_player(Player2)
+
     return [p1, p2, ]
 
 def has_player_won(board):
@@ -116,7 +119,13 @@ def is_game_over(board, players):
 game_over = False
 board = start()
 players = game_setup()
-print players
+signs = ["X", "0"]
+players_marks = {}
+for player in range(len(players)):
+    players_marks[players[player].name] = signs[player]
+
+for k, v in  players_marks.iteritems():
+    print "Player : {} plays with {}".format(k, v)
 winner = None
 
 while (not game_over):
@@ -124,13 +133,17 @@ while (not game_over):
     for player in players:
         try:
             move = player.play(board)
-            board.play(player.name, move)
+            board.play(players_marks[player.name], move)
         except IllegalMove as e:
             print e.message
             print "Player : {} is disqualified".format(player.name)
             player.disqualified = True
         finally:
             game_over, winner = is_game_over(board, players)
+            winner_name = None
+            for k, v in  players_marks.iteritems():
+                if winner == v:
+                   winner = k
             board.display()
             if game_over:
                 break

@@ -15,3 +15,5 @@ class BasePlayer(object):
             if len(board.board[colNb]) < board.height:
                 choices.append(colNb)
         return random.choice(choices)
+
+    
