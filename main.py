@@ -7,36 +7,42 @@ from kernel.config import (
     NbOfPlayer,
     Columns,
     Lines,
+    Player1,
+    Player2,
 )
-from framework.exceptions import IllegalMove
-from players.manual import ManualPlayer
-from players.random_player import RandomPlayer
+from framework.exceptions import (
+    IllegalMove,
+    MotorException,
+)
+from players import (
+    ManualPlayer,
+    RandomPlayer,
+)
+from kernel.mods import Players
 
 def start():
     board = Board(Columns, Lines)
     board.start()
     return board
 
-def game_setup():
-    players = []
 
-    # setup with 1 human vs 1 bot
-    #name = raw_input("What's your name ? \n")
-    #player = ManualPlayer(name)
-    #players.append(player)
-    #print "player added : {}".format(name)
-    #players.append(RandomPlayer("B"))
-    #players.append(RandomPlayer("C"))
-    #return players
-    # setup with 2 humans
-    #'''
-    for player in range(NbOfPlayer):
+def create_player(player_type):
+
+    if player_type == Players.Manual:
         name = raw_input("What's your name ? \n")
-        player = ManualPlayer(name)
-        players.append(player)
         print "player added : {}".format(name)
-    return players
-    #'''
+        player = ManualPlayer(name)
+        return player
+    elif player_type == Players.Bot:
+        return RandomPlayer("A")
+    else:
+        raise MotorException("No other player type is available!")
+
+def game_setup():
+
+    p1 = create_player(Player1)
+    p2 = create_player(Player2)
+    return [p1, p2, ]
 
 def has_player_won(board):
     winner = None
