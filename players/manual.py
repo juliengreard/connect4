@@ -9,6 +9,6 @@ class ManualPlayer(BasePlayer):
         super(ManualPlayer, self).__init__(name = name)
 
     def play(self, board):
-        col = raw_input("[ {} ] On which column do you play ?\n".format(self.name))
+        col = input("[ {} ] On which column do you play ?\n".format(self.name))
         col = int(col)
         return col

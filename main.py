@@ -30,8 +30,8 @@ def create_player(player_type):
 
     player = None
     if player_type == Players.Manual:
-        name = raw_input("What's your name ? \n")
-        print "player added : {}".format(name)
+        name = input("What's your name ? \n")
+        print("player added : {}".format(name))
         player = ManualPlayer(name)
     elif player_type == Players.Bot:
         player = RandomPlayer("RandomBot")
@@ -124,8 +124,8 @@ players_marks = {}
 for player in range(len(players)):
     players_marks[players[player].name] = signs[player]
 
-for k, v in  players_marks.iteritems():
-    print "Player : {} plays with {}".format(k, v)
+for k, v in  players_marks.items():
+    print("Player : {} plays with {}".format(k, v))
 winner = None
 
 while (not game_over):
@@ -135,13 +135,13 @@ while (not game_over):
             move = player.play(board)
             board.play(players_marks[player.name], move)
         except IllegalMove as e:
-            print e.message
-            print "Player : {} is disqualified".format(player.name)
+            print(e.message)
+            print("Player : {} is disqualified".format(player.name))
             player.disqualified = True
         finally:
             game_over, winner = is_game_over(board, players)
             winner_name = None
-            for k, v in  players_marks.iteritems():
+            for k, v in  players_marks.items():
                 if winner == v:
                    winner = k
             board.display()
@@ -149,7 +149,7 @@ while (not game_over):
                 break
 
 if winner:
-    print "Game over, player {} won".format(winner)
+    print("Game over, player {} won".format(winner))
 else:
-    print "Game over, draw"
+    print("Game over, draw")
 
