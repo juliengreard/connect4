@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from mods import Players
+from .mods import Players
+
 NbAlignToWin = 4
 NbOfPlayer = 2
 Columns = 9

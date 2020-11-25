@@ -59,13 +59,13 @@ class Board(object):
             col = invert_col(col)
             cols_to_display.append(col)
 
-        print " ".join([str(x) for x in range(self.height - 1)]) # print coordinates
+        print(" ".join([str(x) for x in range(self.height - 1)])) # print coordinates)
 
         for line in range(self.height):
             displayed_line = []
             for col in cols_to_display:
                 displayed_line.append(col[line])
-            print "|".join(displayed_line)
+            print("|".join(displayed_line))
 
     @property
     def width(self):
